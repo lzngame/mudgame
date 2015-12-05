@@ -1,0 +1,135 @@
+Ext.require(['Ext.form.Panel','Ext.form.FieldSet']);
+Ext.application({
+	name:'myapp',
+	launch:function(){
+		var formpanel = Ext.create('Ext.form.Panel',{
+			id:'formpanel',
+			scrollable:'vertical',
+			baseCls:'bgblack',
+			cls:'whitefont',
+			items:[
+				{
+					xtype:'fieldset',
+					title:'虫族之心',
+					instructions:'请登录游戏',
+					defaults:{
+						labelwidth:'20%',
+					}
+				},
+				{
+					xtype:'textfield',
+					id:'txt_title',
+					name:'title',
+					label:'用户名',
+					placeHolder:'星河战队',
+					required:true,
+					clearIcon:true,
+					listeners:{
+						change:function(item,newValue,oldValue){
+							Ext.Msg.alert("请检查用户名和密码");
+						}
+					}
+				},
+				{
+					xtype:'passwordfield',
+					id:'txt_director',
+					name:'director',
+					label:'密码',
+					placeHolder:'黑泽明',
+					clearIcon:true
+				},
+				{
+					xtype:'spinnerfield',
+					id:'spinnernum',
+					name:'numspinner',
+					minValue:1000,
+					maxValue:9999,
+					increment:1,
+					label:'编号',
+					groupButtons:false
+					
+				},
+				{
+					xtype:'textareafield',
+					id:'txtarea',
+					name:'memo',
+					label:'游戏简介',
+					placeHodler:'请输入介绍'	,
+					clearIcon:true,
+					maxLength:1000,
+					maxRows:4,
+				},
+				{
+					xtype:'searchfield',
+					name:'searchtxt',
+					label:'检索',
+					placeHolder:'关键字',
+					clearIcon:true
+				},
+				{
+					xtype:'fieldset',
+					title:'选择性别',
+					id:'choisesex',
+					defaults:{
+						xtype:'radiofield',
+						layout:{
+							type:'hbox'
+						}
+					},
+					items:[
+						{
+							id:'rb_sex_male',
+							name:'sex',
+							value:'male',
+							label:'男性',
+							checked:false,
+							listeners:{
+								check:function(item,e){
+									console.log('choise male');
+								}
+							},
+							
+						},
+						{
+							id:'rb_sex_female',
+							name:'sex',
+							value:'female',
+							label:'女性',
+							checked:false,
+							listeners:{
+								check:function(item,e){
+										console.log('choise female');
+									}
+							},
+						}
+					]
+				},
+				{
+					xtype:'panel',
+					layout:{
+						type:'hbox',
+						pack:'end',
+					},
+					defaults:{
+						xtype:'button',
+						flex:1,
+						align:'center',
+						//ui:'decline'
+					},
+					items:[
+						{text:'提交'},
+						{
+							text:'重置',
+							iconCls:'btn-icon',
+							iconAlign:'right'
+						}
+					]
+				}
+			]
+		});
+		Ext.Viewport.add(formpanel);
+		var p = formpanel.getComponent('rb_sex_male');
+		
+	}
+	
+});
